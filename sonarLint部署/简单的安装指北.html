@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+    <html>
+    <head>
+        <meta charset="UTF-8">
+        <title>sonarLint部署</title>
+        
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/markdown.css">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/Microsoft/vscode/extensions/markdown-language-features/media/highlight.css">
+        
+        <style>
+.task-list-item { list-style-type: none; } .task-list-item-checkbox { margin-left: -20px; vertical-align: middle; }
+</style>
+        <style>
+            body {
+                font-family: -apple-system, BlinkMacSystemFont, 'Segoe WPC', 'Segoe UI', 'Ubuntu', 'Droid Sans', sans-serif;
+                font-size: 14px;
+                line-height: 1.6;
+            }
+        </style>
+        
+        
+    </head>
+    <body class="vscode-light">
+        <h1 id="sonarlint%e9%83%a8%e7%bd%b2">sonarLint部署</h1>
+<h2 id="%e7%ae%80%e5%8d%95%e7%9a%84%e5%ae%8c%e5%85%a8%e5%ae%89%e8%a3%85%e6%8c%87%e5%8c%97">简单的完全安装指北</h2>
+<ol>
+<li><a href="!https://www.sonarqube.org/downloads/">点我下载SonarQube社区版</a></li>
+<li>解压缩到文件夹</li>
+<li>启动SonarQube Server</li>
+</ol>
+<pre><code class="language-sh"><div><span class="hljs-comment"># On Windows, excute:</span>
+C:\path\to\sonarqube\bin\windows-x86-xx\StartSonar.bat
+
+<span class="hljs-comment"># On other os, excute:</span>
+/path/to/bin/[OS]/sonar.sh console
+</div></code></pre>
+<ol start="4">
+<li>在浏览器中打开localhost:9000，以默认管理员身份登录（登录名=admin,密码=admin）</li>
+<li>创建新项目
+<img src="file:////Users/chenyuantong/Documents/WorkSpace/GitBook/MyNote/sonarLint部署/2020-03-30-10-29-08.png" alt=""></li>
+<li>Display name 和 Projet key
+可以用项目名字和它的md5值，比如
+王者荣耀/ccb61d96c8f867d4f6c412e95c4f173a，然后点set up
+<img src="file:////Users/chenyuantong/Documents/WorkSpace/GitBook/MyNote/sonarLint部署/2020-03-30-10-29-44.png" alt=""></li>
+<li>为项目设置一个token
+<img src="file:////Users/chenyuantong/Documents/WorkSpace/GitBook/MyNote/sonarLint部署/2020-03-30-10-31-30.png" alt="">
+<img src="file:////Users/chenyuantong/Documents/WorkSpace/GitBook/MyNote/sonarLint部署/2020-03-30-10-32-18.png" alt=""></li>
+<li>选择开发语言和系统，就会自动生成命令
+<img src="file:////Users/chenyuantong/Documents/WorkSpace/GitBook/MyNote/sonarLint部署/2020-03-30-10-33-19.png" alt=""></li>
+<li>终端进入开发目录，然后运行8中生成的命令，等待结束后，就能在网站中看到分析结果了</li>
+</ol>
+<div style="font-family:Helvetica; font-size: 14px; color:#31353b"><p class="MsoNormal" align="left" style="color: rgb(0, 0, 0); font-family: Microsoft YaHei UI; font-size: 14px; margin: 0px 0cm; line-height: normal; text-align: justify;"><br></p></div><div style="font-family:Helvetica; font-size: 14px; color:#31353b"><div><div><div><div><div><div><hr color="#b5c4df" size="1" align="left" style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: Helvetica, 微软雅黑, 宋体; width: 210px; height: 1px;"><div style="caret-color: rgb(0, 0, 0); color: rgb(0, 0, 0); font-family: Helvetica, 微软雅黑, 宋体;"><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; line-height: normal; text-align: justify;"><span style="line-height: 17px; color: rgb(118, 116, 116); background-color: window; font-size: 12px;"><font face="宋体">| 陈元通</font></span></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; line-height: normal; text-align: justify;"><font face="宋体" style="font-size: 12px;"><font color="#767474"><span style="line-height: 17px;">公司：</span></font><span style="line-height: 1.5; color: rgb(118, 116, 116);">广州君海网络科技有限公司</span></font></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; line-height: normal; text-align: justify;"><font face="宋体" style="font-size: 12px;"><font color="#767474"><span style="line-height: 17px;">地址：</span></font><span style="background-color: window;"><font color="#808080">广州市海珠区新港东路618号南丰汇13楼</font></span></font></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; text-align: justify; line-height: 12pt; color: rgb(0, 0, 128);"><font face="宋体" style="font-size: 12px;"><span style="line-height: 13pt; color: rgb(118, 116, 116); background-color: window;">手机：<span lang="EN-US">+86-18022183344</span></span><span style="line-height: 13pt; color: rgb(118, 116, 116); background-color: window;"> </span><span style="line-height: 13pt; color: rgb(118, 116, 116); background-color: window;"><span lang="EN-US">| </span>QQ：982866463</span></font></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; text-align: justify; line-height: 13pt; color: rgb(0, 0, 128);"><span style="color: rgb(118, 116, 116); font-size: 12px;"><font face="宋体">邮箱：</font></span><a href="mailto:chenyuantong@ijunhai.com" style="font-family: 宋体; font-size: 13px;">chenyuantong@ijunhai.com</a></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; font-size: 13.3333px; text-align: justify; line-height: 13pt; color: rgb(0, 0, 128);"><span style="font-family: 微软雅黑; line-height: 13pt; color: rgb(166, 166, 166); font-size: 12px; text-align: left;">————————————————</span></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; font-size: 13.3333px; text-align: justify; line-height: 13pt; color: rgb(0, 0, 128);"><span style="color: rgb(118, 116, 116);"><font face="宋体">本邮件载有秘密信息，请您恪守保密义务，勿向第三人透露。</font></span></p><p class="MsoNormal" align="left" style="margin: 0px 0cm; font-family:Microsoft YaHei UI; font-size: 13.3333px; text-align: justify; line-height: 13pt; color: rgb(0, 0, 128);"><img src="https://mail-online.nosdn.127.net/wzpmmc/8fc51789330bd7d43208139f24dd128d.png" naturalheight="394px" naturalwidth="1075px" currentsize="4" style="color: rgb(0, 0, 0); font-size: 14px; font-family: 微软雅黑; width: 161.35173294427418px; height: 59.137286307017696px;"></p></div></div>
+    </body>
+    </html>

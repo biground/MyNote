@@ -1,5 +1,8 @@
 {
-    "title" : "Bucciarati's tongue",
+    "title": "Bucciarati's tongue",
     "author": "biground",
-    "language": "zh-hans"
+    "language": "zh-hans",
+    "plugins": [
+        "summary"
+    ]
 }
