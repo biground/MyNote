@@ -1,13 +1,15 @@
-
-## Blog开发记录
-
-- [Blog开发记录](Blog开发记录/Vue插槽使用.md)
-- [Blog开发记录](Blog开发记录/Vue项目结构.md)
-
 ## sonarLint部署
 
 - [简单的完全安装指北](sonarLint部署/简单的安装指北.md)
 - [工具配置环境需求](sonarLint部署/配置环境需求.md)
+
+## 优化
+
+- [Base类泛型.md](优化/Base类泛型.md)
+- [起因](优化/使用browser-sync和vscode进行typescript自动热更调试.md)
+- [网页字体格式](优化/字体精简.md)
+- [解决问题：](优化/微信优化.md)
+- [资源使用标准](优化/资源使用规范.md)
 
 ## 环境搭建
 
