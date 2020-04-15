@@ -1,3 +1,4 @@
+# Base类泛型
 为BaseView、BaseLayout、BaseDialog类添加了模板约束，使其派生的子类在对UI和Controller的赋值后能够约束到controller和ui的具体类型：
 ```typescript
 abstract class BaseView<basectrl extends BaseController, baseui extends Laya.View | Laya.Sprite> extends Laya.View {
