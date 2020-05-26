@@ -2,6 +2,119 @@
 ###
 Laya IDE中的Debug使用的是`tsc -p . --outDir bin/js`命令将src/modules中的.ts文件编译并输出到对应的bin/js目录下，虽然按个F5就能启动调试，但是不管你更改了多少内容，每次调试都要等30-60秒左右浏览器才会启动。
 
+## 流程总结
+1. 打开cmd  
+npm install layaair-cmd -g
+npm install browser-sync -g
+
+2. 在client/.vscode目录下的launch.json文件(没有就新建一个)中添加配置：
+```json
+{
+	"version": "0.2.0",
+	"configurations": [
+		{
+			"name": "chrome调试",
+			"type": "chrome",
+			"request": "attach",
+			"port": 9222,
+			"url":"http://localhost:3010/bin",
+			"sourceMaps": true,
+			"webRoot": "${workspaceRoot}/bin"
+		}
+	]
+}
+```
+3. 将以下代码复制到client/.vscode/tsc.py中：
+```py
+import sys
+import os
+import hashlib
+import json
+from string import Template
+
+client = './src'
+outPutDir = './bin/js'
+template = Template(
+    # 'tsc --outFile ${output} --target es5 --sourceMap true ${input} | grep "隐藏错误输出"') --MacOS
+	Template('tsc --outFile ${output} --target es5 --sourceMap true ${input} | findstr "隐藏错误输出"')
+
+def execCmd(cmd) -> str:
+    r = os.popen(cmd)
+    text = r.read()
+    r.close()
+    return text
+
+def main(argv):
+    if argv[1] == "--outDir":
+        os.system('layaair-cmd compile')
+        updateFiles()
+        print("更新成功")
+    elif argv[1] == "--outFiles":
+        sourceList, fileList = updateFiles()
+        for (out, source) in zip(fileList, sourceList):
+            cmd = template.substitute(output=out, input=source)
+            print(cmd[:-16])
+            os.system(cmd)
+    elif argv[1] == "--update":
+        updateFiles()
+        print("更新成功")
+
+def updateFiles():
+    mFiles = None
+    try:
+        f = open('mFiles.json', 'r+')
+    except IOError:
+        f = open('mFiles.json', 'w+')
+    try:
+        mFiles = json.load(f)
+    except json.decoder.JSONDecodeError:
+        mFiles = {}
+    (sourceList, fileList) = travelFilesCheckModify(mFiles)
+    f.seek(0)
+    f.truncate()
+    json.dump(mFiles, f)
+    f.close()
+    return (sourceList, fileList)
+
+def travelFilesCheckModify(mFiles):
+    sourceList = list()
+    fileList = list()
+    for main_dir, _, files in os.walk(client):
+        for f in files:
+            path = os.path.join(main_dir, f).replace("\\", '/')
+            md5 = getMD5(path)
+            if path not in mFiles:
+                mFiles[path] = md5
+            elif path in mFiles and mFiles[path] != md5:
+                mFiles[path] = md5
+                if path not in sourceList:
+                    sourceList.append(path)
+                pathList = path.replace("src/", "").split("/")[1:-1]
+                outPut = "/" + "/".join(pathList) + \
+                    "/" if len(pathList) != 0 else "/"
+                filename = outPutDir + outPut + \
+                    ".".join(path.split('/')[-1].split(".")[0:-1]) + ".js"
+                if filename not in fileList:
+                    fileList.append(filename)
+    return (sourceList, fileList)
+
+def getMD5(path):
+    md5 = ''
+    with open(path, 'rb') as f:
+        md5 = hashlib.md5(f.read()).hexdigest()
+    return md5
+
+if __name__ == "__main__":
+    main(sys.argv)
+```
+
+4. 打开cmd，cd到client目录，运行`browser-sync start --server --files "./bin/**/*.js" --browser chrome --startPath bin --port 3010`
+5. 打开cmd, cd到tsc.py文件所在的目录
+   1. `python -m tsc --update` 只更新文件md5，不编译文件
+   2. `python -m tsc --outFile` 编译从上次更新到现在所更改的文件，同时更新文件md5
+   3. `python -m tsc --outDir` 编译整个项目，同时更新md5值
+
+## 涉及到的知识
 ### layaair-cmd 介绍
 layaair-cmd是layaair的命令行工具，使用layaair-cmd可以在不打开IDE的情况下对layaair项目进行编译发布的操作，经常使用的功能有：  
 功能|子命令
