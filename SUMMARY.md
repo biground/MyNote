@@ -4,6 +4,10 @@
 - [Blog开发记录](Blog开发记录/Vue插槽使用.md)
 - [Blog开发记录](Blog开发记录/Vue项目结构.md)
 
+## Cocos
+
+- [IDEA](Cocos/在IDEA中搭建Lua开发环境.md)
+
 ## Laya2.0相关
 
 - [gulp自动化任务](Laya2.0相关/gulp的配置.md)
@@ -11,10 +15,14 @@
 ## Lua
 
 - [nil](Lua/nil与boolean.md)
-- [函数.md](Lua/函数.md)
+- [位运算](Lua/位和字节.md)
+- [函数](Lua/函数.md)
 - [字符串](Lua/字符串.md)
 - [Lua5.3的数值](Lua/数值.md)
+- [模式匹配](Lua/模式匹配.md)
+- [局部变量](Lua/补充知识.md)
 - [表](Lua/表.md)
+- [闭包](Lua/闭包.md)
 
 ## sonarLint部署
 
