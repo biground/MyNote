@@ -6,7 +6,12 @@
 
 # @lc code=start
 class Solution:
-    def kClosest(self, points: List[List[int]], K: int) -> List[List[int]]:
-        
+    def sortRule(self, elem):
+        return elem[0]**2 + elem[1]**2
+    def kClosest(self, points, K):
+        points.sort(key=self.sortRule)
+        return points[:K]
+
+# Solution().kClosest([[3,3],[5,-1],[-2,4]], 2)
 # @lc code=end
 
